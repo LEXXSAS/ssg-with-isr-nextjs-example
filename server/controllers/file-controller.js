@@ -9,42 +9,14 @@ import iconvlite from 'iconv-lite';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// const addDataFromFileToDb = async(fileData) => {
-//   const obj = {...fileData}
-  
-//   const q = "INSERT INTO notes(`title`, `author`, `body`, `priority`) VALUES (?)"
-
-//   const values = [
-//     obj[0].title,
-//     obj[0].author,
-//     obj[0].body,
-//     obj[0].priority
-//   ]
-
-//   db.query(q, [values], (err, data) => {
-//     if (err) return res.status(500).json(err);
-//     return res.json({message: "Заметка успешно добавлена!"});
-//   })
-// };
-
 function getWord(word, a1) {
   return a1.includes(word)
-  // return a1.filter(s => {
-  //   const regex = new RegExp(word, 'gi');
-  //   return s.match(regex);
-  // })
 }
 
 const comparisonFilesName = (pathToDir, fileName) => {
   const allFiles = fs.readdirSync(pathToDir);
-  // let regWord = word.replace(/[^a-zа-яё0-9\s]/gi, ' ').replaceAll(' ', '')
   const ourWord =  getWord(fileName, allFiles);
   return ourWord
-  // if (ourWord.length > 0) {
-  //   return true
-  // } else {
-  //   return false
-  // }
 }
 
 const fileUploadFunc = async(file, fileTxt) => {
@@ -57,10 +29,8 @@ const fileUploadFunc = async(file, fileTxt) => {
       file.mv(pathToDir + fileTxt, {overwrite: true})
         .then(() => {
           const fileJsonData = txtJson.readFiles(pathToDir + fileTxt);
-          // const fileJsonData = txtJson.readFiles(pathToDir + fileTxt);
           fileJsonData
           .then(data => {
-            // addDataFromFileToDb(data)
 
             const obj = {...data}
             const q = "INSERT INTO notes(`title`, `author`, `body`, `priority`) VALUES (?)"

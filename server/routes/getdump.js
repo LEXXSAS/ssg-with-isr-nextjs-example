@@ -23,8 +23,6 @@ const middleWare = async(req, res, next) => {
     console.log('Dump created successfully');
   })
   .catch((err) => {
-    // throw new Error(err)
-    // res.status(500).json({message: 'Dump create error!!!'})
     console.log('Dump create error!!! ', err)
   })
   next()
@@ -37,7 +35,6 @@ const __dirname = path.dirname(__filename);
 const pathToStatic = path.join(__dirname, '../static', 'dumpnewnotes.sql')
 
 router.get('/file', isLoggedIn, middleWare, (req, res) => {
-  // if (err) res.status(500).json({message: 'Dump create error!!!'})
   res.download(pathToStatic);
 });
 

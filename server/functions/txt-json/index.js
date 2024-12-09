@@ -1,24 +1,15 @@
-import { error } from 'console';
 import fs from 'fs';
 import readline from 'node:readline';
 
-// const filesDir = path.join(__dirname, 'files', 'test.txt');
-
-// function getFileExtension(filePath) {
-//   const parts = filePath.split('.').filter(Boolean);
-//   return parts.length > 1 ? parts.splice(1).join('.') : 'Расширение отстуствует';
-// }
 function getFileExtension(filePath) {
   const parts = filePath.split('.').filter(Boolean);
   return parts.length > 1 ? parts.splice(1).join('.') : 'Расширение отстуствует';
-  // console.log('parts => ', parts)
 }
 
 class TxtToJson {
   async readFiles(filesDir) {
     if ((getFileExtension(filesDir) !== 'txt')) {
       throw new Error('формат не соответствует txt');
-      // console.log('формат не соответствует txt');
     }
     else {
       return new Promise((resolve, reject) => {

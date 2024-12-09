@@ -16,11 +16,6 @@ export interface Note {
   priority: string
 }
 
-// const getDataMain = async(selected: string): Promise<NotesData | void | null> => {
-//   const res = await NotesService.fetchByPriorityOrAllNotes(selected);
-//   return res;
-// };
-
 export default async function NotesByPriority({ searchParams }:
   {
     searchParams?: { [key: string]: string | string[] | undefined };
@@ -32,8 +27,6 @@ export default async function NotesByPriority({ searchParams }:
   console.log('selected => ', selected);
 
   const dataNotes = await NotesService.fetchByPriorityOrAllNotes(selected);
-
-  // const dataNotes = await getDataMain(selected)
 
   return (
     <div>

@@ -238,8 +238,8 @@ export const searchNotesByTitle = async(req, res) => {
 
   const search = req.query.search;
 
-  const sqlcountsearch = `SELECT COUNT(*) FROM notes WHERE title LIKE '${search}%'`;
-  const sqltitlesearch = `SELECT * FROM notes WHERE title LIKE '${search}%' LIMIT ${page}, ${rowperpage}`;
+  const sqlcountsearch = `SELECT COUNT(*) FROM notes WHERE title LIKE '%${search}%'`;
+  const sqltitlesearch = `SELECT * FROM notes WHERE title LIKE '%${search}%' LIMIT ${page}, ${rowperpage}`;
   db.query(sqlcountsearch, (err, data) => {
     if (err) return res.status(500).json(err);
 
@@ -265,38 +265,14 @@ export const updateNotePriority = async(req, res) => {
   })
 }
 
-const getAllPagination = async(req) => {
-  // const page = req.query.p || 0
-  // const dataPerPage = req.query.perpage || 5
-  // const allDocs = await Alldata.countDocuments()
-  // const totalPages = Math.ceil(allDocs / dataPerPage)
-  // const paginationalldata = await Alldata
-  // .find()
-  // .sort({$natural: -1})
-  // .skip(Number(page) * dataPerPage)
-  // .limit(dataPerPage)
-  // return {paginationalldata, page: page, dataPerPage: dataPerPage, alldocs: allDocs, totalpages: totalPages};
-}
-
 // пагинация nextpage с поиском по приоритету и заголовку
 export const nextPageAndPagination = async(req, res) => {
-  console.log('произведен запрос данных ' + req.query.currentpage);
   let starttwo = 0;
   let page = Number(req.query.currentpage) || 0;
   let starnewpage = null;
 
   let prioritynext = req.query.prioritynext;
   let searchvaluenext = req.query.searchvaluenext
-  
-  // if (req.query.currentpage === undefined) {
-  //   starttwo = 0;
-  // } else {
-  //   starttwo = req.query.currentpage++
-  //   starnewpage = starttwo++
-  //   starnewpage++
-  // }
-  // page = starttwo * rowperpage;
-  // page =  page * rowperpage;
 
   if (prioritynext === 'low' || prioritynext === 'middle' || prioritynext === 'high' && prioritynext !== 'Выбор приоритета') {
 
@@ -370,18 +346,6 @@ export const prevPageAndPagination = async(req, res) => {
 
   const priorityprev = req.query.priorityprev;
   const searchvalueprevious = req.query.searchvalueprevious;
-
-  // if (req.query.currentpage === undefined) {
-  //   starttwo = 0;
-  // } else {
-  //   if (req.query.currentpage > 0) {
-  //     starttwo = req.query.currentpage--
-  //     starnewpage = starttwo--
-  //     starnewpage--
-  //   }
-  // }
-
-  // page = starttwo * rowperpage;
 
   if (priorityprev === 'low' || priorityprev === 'middle' || priorityprev === 'high') {
     const sqlcountpriority = "SELECT COUNT(*) FROM notes WHERE priority=?";

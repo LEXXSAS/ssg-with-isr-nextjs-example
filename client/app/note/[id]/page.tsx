@@ -22,13 +22,9 @@ export interface Note {
   priority: string
 }
 
-// export const dynamicParams = false;
 async function getArrayId(): Promise<number[]> {
   const res = await fetch('http://localhost:3001/api/data/notes?perpage=0');
   const {data: notes}: NotesData = await res.json();
-  // const notesSlice = notes.slice(0, 4);
-  // const obj: NotesData[] = Object.values(notes);
-  // const arrId: number[] = notesSlice.map(item => item.id);
   const arrId: number[] = notes.map(item => item.id);
   const pagesCount = Math.ceil(Number(arrId.length) / 4);
   // eslint-disable-next-line prefer-const
@@ -46,12 +42,6 @@ export async function generateStaticParams(): Promise<{id: string}[]> {
       id: ourId.toString()
     };
   });
-  // const arr = ['1', '2', '3'];
-  // return arr.map((item) => {
-  //   return {
-  //     id: item.toString()
-  //   };
-  // });
 }
 
 export default async function Note({ params }: PostPageProps

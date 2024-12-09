@@ -14,8 +14,6 @@ header {
 }
 
 main {
-  /* border: 2px dashed rgba(18, 69, 71, 0.5); */
-  /* border: 2px dotted rgba(57, 183, 22, 0.5); */
   border: 2px dotted cadetblue;
   width: 100%;
   max-width: 1470px;
